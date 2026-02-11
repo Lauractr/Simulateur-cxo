@@ -29,7 +29,7 @@
             text-align: center;
         }
         .logo { width: 130px; margin-bottom: 15px; }
-        h1 { font-size: 1.3rem; margin-bottom: 25px; color: #00FFFF; text-transform: uppercase; letter-spacing: 1px; }
+        h1 { font-size: 1.2rem; margin-bottom: 25px; color: #00FFFF; text-transform: uppercase; }
         .input-group { margin-bottom: 15px; text-align: left; }
         label { display: block; margin-bottom: 5px; font-size: 0.85rem; opacity: 0.9; }
         input {
@@ -50,20 +50,17 @@
             border-radius: 15px;
             border: 1px solid rgba(0, 255, 255, 0.5);
         }
-        .result-label { font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 5px; }
         .result-value { font-size: 2.2rem; font-weight: bold; color: #00FFFF; margin: 5px 0; }
         
         .boost-section {
             margin-top: 20px;
             text-align: left;
             font-size: 0.85rem;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 15px;
-            border-radius: 10px;
+            padding: 10px;
         }
         .boost-title { color: #00FFFF; font-weight: bold; margin-bottom: 10px; display: block; }
-        .boost-item { margin-bottom: 8px; display: flex; align-items: flex-start; }
-        .boost-item span { color: #00FFFF; margin-right: 8px; }
+        .boost-item { margin-bottom: 5px; }
+        .disclaimer { font-size: 0.75rem; font-style: italic; opacity: 0.7; margin-top: 5px; display: block; }
 
         .btn-calendly {
             display: inline-block;
@@ -84,7 +81,7 @@
 
 <div class="glass-panel">
     <img src="logo.png" alt="CXO Celexio" class="logo">
-    <h1>VOTRE REVENU OPTIMISÉ</h1>
+    <h1>VOTRE SALAIRE OPTIMISÉ</h1>
 
     <div class="input-group">
         <label>TJM HT (€)</label>
@@ -96,18 +93,19 @@
     </div>
 
     <div class="result-box">
-        <div class="result-label">ESTIMATION NET MENSUEL</div>
+        <div style="font-size: 0.8rem; letter-spacing: 1px;">ESTIMATION NET MENSUEL</div>
         <div id="total-net" class="result-value">-- €</div>
     </div>
 
     <div class="boost-section">
         <span class="boost-title">🚀 Boostez votre net avec Aurélie :</span>
-        <div class="boost-item"><span>✔</span> Pack Optimisation (Frais + TR) : +300€ / mois de net</div>
-        <div class="boost-item"><span>✔</span> Tickets Restaurant : Inclus dans le pack</div>
-        <div class="boost-item"><span>✔</span> PEE / PERCO : Épargne non imposable</div>
+        <div class="boost-item">✓ Tickets Restau of course !</div>
+        <div class="boost-item">✓ PEE / PERCO : Épargne non imposable</div>
+        <div class="boost-item">✓ Remboursements Frais Pro* : +300 €</div>
+        <span class="disclaimer">*tickets restau, frais de déplacement, essence etc.</span>
     </div>
 
-    <a href="https://calendly.com/aurelie-dubois-celexio/cxo-portage" class="btn-calendly">OBTENIR MA PROPALE PDF</a>
+    <a href="https://calendly.com/aurelie-dubois-celexio/cxo-portage" class="btn-calendly">OBTENIR MON PLAN D'OPTIMISATION ✨</a>
 </div>
 
 <script>
@@ -116,22 +114,14 @@ function calculer() {
     const jours = document.getElementById('jours').value;
     const ca = tjm * jours;
     
-    // Frais de gestion CXO (5%)
     const gestion = ca * 0.05;
+    const enveloppeOptimisation = 300; // Inclut TR + Frais pro
     
-    // L'enveloppe globale d'optimisation (Frais pro + Tickets Resto)
-    const enveloppeOptimisation = 300; 
-    
-    // Calcul de la masse salariale après déduction de la gestion et de l'enveloppe
     const masseSalariale = ca - gestion - enveloppeOptimisation;
-    
-    // Salaire net estimé (coeff charges 1.45 et net/brut 0.78)
     const salaireNet = (masseSalariale / 1.45) * 0.78;
-    
-    // Revenu final = Salaire Net + l'enveloppe des 300€ (récupérée net de charges)
     const totalFinal = salaireNet + enveloppeOptimisation;
 
-    document.getElementById('total-net').innerText = totalFinal.toLocaleString('fr-FR', { maximumFractionDigits: 0 }) + " €";
+    document.getElementById('total-net').innerText = Math.round(totalFinal).toLocaleString('fr-FR') + " €";
 }
 calculer();
 </script>
