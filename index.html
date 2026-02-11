@@ -14,7 +14,6 @@
             display: flex; justify-content: center; align-items: center;
             min-height: 100vh; color: white;
         }
-        /* Panneau central sombre et flouté */
         .glass-panel {
             background: rgba(10, 15, 30, 0.85);
             backdrop-filter: blur(20px);
@@ -24,14 +23,14 @@
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
             text-align: center;
         }
-        .logo { width: 120px; margin-bottom: 25px; opacity: 0.9; }
+        .logo { width: 120px; margin-bottom: 25px; }
         h1 { font-size: 1.4rem; margin-bottom: 35px; color: #00FFFF; text-transform: uppercase; letter-spacing: 2px; }
         
-        /* Style des Sliders */
         .input-group { margin-bottom: 30px; text-align: left; }
-        .label-row { display: flex; align-items: center; margin-bottom: 12px; font-size: 0.95rem; font-weight: 500; }
+        .label-row { display: flex; align-items: center; margin-bottom: 12px; font-size: 0.95rem; }
         .value-display { color: #00FFFF; font-weight: bold; margin-left: 8px; }
         
+        /* Style des Sliders Cyan */
         input[type=range] {
             width: 100%; -webkit-appearance: none; background: rgba(255, 255, 255, 0.15);
             height: 5px; border-radius: 5px; outline: none;
@@ -48,23 +47,21 @@
             background: linear-gradient(135deg, #4A148C 0%, #7B1FA2 100%);
             border-radius: 20px; box-shadow: 0 10px 25px rgba(123, 31, 162, 0.4);
         }
-        .result-label { font-size: 0.9rem; opacity: 0.9; margin-bottom: 8px; font-weight: 300; }
+        .result-label { font-size: 0.9rem; opacity: 0.9; margin-bottom: 8px; }
         .result-value { font-size: 2.8rem; font-weight: 700; color: #00FFFF; }
 
         /* Section Boost avec tes textes exacts */
         .boost-section { margin-top: 30px; text-align: left; font-size: 0.85rem; line-height: 1.6; }
         .boost-title { color: #00FFFF; font-weight: bold; margin-bottom: 12px; display: block; }
         .boost-item { margin-bottom: 6px; display: flex; align-items: center; }
-        .disclaimer { font-size: 0.75rem; font-style: italic; opacity: 0.6; margin-top: 5px; display: block; padding-left: 15px; }
+        .disclaimer { font-size: 0.75rem; font-style: italic; opacity: 0.6; margin-top: 5px; display: block; }
 
-        /* Bouton Calendly */
         .btn-calendly {
             display: inline-block; margin-top: 35px; padding: 18px 30px;
             background: #00FFFF; color: #000; text-decoration: none;
             border-radius: 50px; font-weight: 800; font-size: 0.85rem;
             transition: all 0.3s ease; text-transform: uppercase;
         }
-        .btn-calendly:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0, 255, 255, 0.4); }
     </style>
 </head>
 <body>
@@ -111,11 +108,9 @@ function calculer() {
     const gestion = ca * 0.05;
     const enveloppeOptimisation = 300; 
     
-    // Calcul fidèle à ta méthode : CA - gestion - 300€ d'optimisation
+    // Calcul incluant les 300€ d'optimisation (frais + TR)
     const masseSalariale = ca - gestion - enveloppeOptimisation;
     const salaireNet = (masseSalariale / 1.45) * 0.78;
-    
-    // On rajoute les 300€ net d'impôts au résultat final
     const totalFinal = salaireNet + enveloppeOptimisation;
 
     document.getElementById('total-net').innerText = Math.round(totalFinal).toLocaleString('fr-FR') + " €";
