@@ -14,76 +14,77 @@
             display: flex; justify-content: center; align-items: center;
             min-height: 100vh; color: white;
         }
+        /* Panneau central sombre et flouté */
         .glass-panel {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            padding: 30px; width: 420px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            background: rgba(10, 15, 30, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 40px; width: 450px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
             text-align: center;
         }
-        .logo { width: 130px; margin-bottom: 15px; }
-        h1 { font-size: 1.2rem; margin-bottom: 25px; color: #00FFFF; text-transform: uppercase; }
-        .input-group { margin-bottom: 25px; text-align: left; }
-        .label-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem; }
-        .value-display { color: #00FFFF; font-weight: bold; }
+        .logo { width: 120px; margin-bottom: 25px; opacity: 0.9; }
+        h1 { font-size: 1.4rem; margin-bottom: 35px; color: #00FFFF; text-transform: uppercase; letter-spacing: 2px; }
         
-        /* Style du Curseur (Slider) */
+        /* Style des Sliders */
+        .input-group { margin-bottom: 30px; text-align: left; }
+        .label-row { display: flex; align-items: center; margin-bottom: 12px; font-size: 0.95rem; font-weight: 500; }
+        .value-display { color: #00FFFF; font-weight: bold; margin-left: 8px; }
+        
         input[type=range] {
-            width: 100%; -webkit-appearance: none; background: rgba(255, 255, 255, 0.2);
-            height: 6px; border-radius: 5px; outline: none;
+            width: 100%; -webkit-appearance: none; background: rgba(255, 255, 255, 0.15);
+            height: 5px; border-radius: 5px; outline: none;
         }
         input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none; width: 18px; height: 18px;
+            -webkit-appearance: none; width: 22px; height: 22px;
             background: #00FFFF; border-radius: 50%; cursor: pointer;
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
         }
 
+        /* Bloc de résultat Violet */
         .result-box {
-            margin-top: 25px; padding: 20px;
-            background: rgba(0, 255, 255, 0.05);
-            border-radius: 15px; border: 1px solid rgba(0, 255, 255, 0.5);
+            margin-top: 20px; padding: 25px;
+            background: linear-gradient(135deg, #4A148C 0%, #7B1FA2 100%);
+            border-radius: 20px; box-shadow: 0 10px 25px rgba(123, 31, 162, 0.4);
         }
-        .result-value { font-size: 2.2rem; font-weight: bold; color: #00FFFF; margin: 5px 0; }
-        
-        .boost-section { margin-top: 20px; text-align: left; font-size: 0.85rem; padding: 10px; }
-        .boost-title { color: #00FFFF; font-weight: bold; margin-bottom: 10px; display: block; }
-        .boost-item { margin-bottom: 5px; }
-        .disclaimer { font-size: 0.75rem; font-style: italic; opacity: 0.7; margin-top: 5px; display: block; }
+        .result-label { font-size: 0.9rem; opacity: 0.9; margin-bottom: 8px; font-weight: 300; }
+        .result-value { font-size: 2.8rem; font-weight: 700; color: #00FFFF; }
 
+        /* Section Boost avec tes textes exacts */
+        .boost-section { margin-top: 30px; text-align: left; font-size: 0.85rem; line-height: 1.6; }
+        .boost-title { color: #00FFFF; font-weight: bold; margin-bottom: 12px; display: block; }
+        .boost-item { margin-bottom: 6px; display: flex; align-items: center; }
+        .disclaimer { font-size: 0.75rem; font-style: italic; opacity: 0.6; margin-top: 5px; display: block; padding-left: 15px; }
+
+        /* Bouton Calendly */
         .btn-calendly {
-            display: inline-block; margin-top: 20px; padding: 15px 25px;
+            display: inline-block; margin-top: 35px; padding: 18px 30px;
             background: #00FFFF; color: #000; text-decoration: none;
-            border-radius: 50px; font-weight: bold; font-size: 0.9rem; transition: 0.3s;
+            border-radius: 50px; font-weight: 800; font-size: 0.85rem;
+            transition: all 0.3s ease; text-transform: uppercase;
         }
-        .btn-calendly:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(0, 255, 255, 0.6); }
+        .btn-calendly:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0, 255, 255, 0.4); }
     </style>
 </head>
 <body>
 
 <div class="glass-panel">
-    <img src="logo.png" alt="CXO Celexio" class="logo">
-    <h1>VOTRE SALAIRE OPTIMISÉ</h1>
+    <img src="logo.png" alt="CXO PORTAGE" class="logo">
+    <h1>SIMULATEUR DE REVENUS</h1>
 
     <div class="input-group">
-        <div class="label-row">
-            <label>TJM HT</label>
-            <span class="value-display"><span id="tjm-val">700</span> €</span>
-        </div>
-        <input type="range" id="tjm" min="300" max="2000" step="10" value="700" oninput="calculer()">
+        <div class="label-row">TJM : <span class="value-display" id="tjm-val">700</span> €</div>
+        <input type="range" id="tjm" min="300" max="1500" step="10" value="700" oninput="calculer()">
     </div>
 
     <div class="input-group">
-        <div class="label-row">
-            <label>Jours travaillés</label>
-            <span class="value-display"><span id="jours-val">20</span> jrs</span>
-        </div>
+        <div class="label-row">Jours travaillés : <span class="value-display" id="jours-val">20</span> j</div>
         <input type="range" id="jours" min="1" max="22" step="1" value="20" oninput="calculer()">
     </div>
 
     <div class="result-box">
-        <div style="font-size: 0.8rem; letter-spacing: 1px;">ESTIMATION NET MENSUEL</div>
+        <div class="result-label">Votre Salaire Net Estimé</div>
         <div id="total-net" class="result-value">-- €</div>
     </div>
 
@@ -103,21 +104,22 @@ function calculer() {
     const tjm = document.getElementById('tjm').value;
     const jours = document.getElementById('jours').value;
     
-    // Mise à jour de l'affichage des valeurs des curseurs
     document.getElementById('tjm-val').innerText = tjm;
     document.getElementById('jours-val').innerText = jours;
 
     const ca = tjm * jours;
     const gestion = ca * 0.05;
-    const enveloppeOptimisation = 300; // Pack Frais + TR inclus
+    const enveloppeOptimisation = 300; 
     
+    // Calcul fidèle à ta méthode : CA - gestion - 300€ d'optimisation
     const masseSalariale = ca - gestion - enveloppeOptimisation;
     const salaireNet = (masseSalariale / 1.45) * 0.78;
+    
+    // On rajoute les 300€ net d'impôts au résultat final
     const totalFinal = salaireNet + enveloppeOptimisation;
 
     document.getElementById('total-net').innerText = Math.round(totalFinal).toLocaleString('fr-FR') + " €";
 }
-// Calcul initial
 calculer();
 </script>
 
