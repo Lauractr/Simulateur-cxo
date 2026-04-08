@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CXO - TJM vers Net</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: url('fondgalaxy.png') no-repeat center center fixed;
+            background-size: cover;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            min-height: 100vh; color: white;
+        }
+        
+        /* Style du menu d'onglets */
+        .tabs-container {
+            display: flex; gap: 10px; margin-bottom: 20px;
+        }
+        .tab-button {
+            background: rgba(255, 255, 255, 0.05);
+            color: white; text-decoration: none;
+            padding: 10px 20px; border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.75rem; font-weight: bold;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+        .tab-button.active {
+            background: rgba(0, 255, 255, 0.2);
+            color: #00FFFF; border: 1px solid #00FFFF;
+        }
+
+        .glass-panel {
+            background: rgba(10, 15, 30, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 40px; width: 450px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+        .logo { width: 120px; margin-bottom: 25px; }
+        h1 { font-size: 1.2rem; margin-bottom: 35px; color: #00FFFF; text-transform: uppercase; letter-spacing: 2px; }
+        .input-group { margin-bottom: 25px; text-align: left; }
+        .label-row { display: flex; align-items: center; margin-bottom: 10px; font-size: 0.9rem; }
+        .value-display { color: #00FFFF; font-weight: bold; margin-left: 8px; }
+        input[type=range] { width: 100%; -webkit-appearance: none; background: rgba(255, 255, 255, 0.15); height: 5px; border-radius: 5px; outline: none; }
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; background: #00FFFF; border-radius: 50%; cursor: pointer; box-shadow: 0 0 10px rgba(0, 255, 255, 0.6); }
+        .result-box { margin-top: 20px; padding: 20px; background: linear-gradient(135deg, #4A148C 0%, #7B1FA2 100%); border-radius: 20px; }
+        .result-label { font-size: 0.85rem; opacity: 0.9; margin-bottom: 5px; }
+        .result-value { font-size: 2.5rem; font-weight: 700; color: #00FFFF; }
+        .details-section { margin-top: 25px; text-align: left; font-size: 0.8rem; line-height: 1.5; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; }
+        .detail-row { display: flex; justify-content: space-between; margin-bottom: 6px; }
+        .detail-label { opacity: 0.7; }
+        .detail-val { font-weight: bold; color: #00FFFF; }
+        .btn-calendly { display: inline-block; margin-top: 25px; padding: 15px 25px; background: #00FFFF; color: #000; text-decoration: none; border-radius: 50px; font-weight: 800; font-size: 0.8rem; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+
+    <div class="tabs-container">
+        <a href="index.html" class="tab-button">Standard</a>
+        <a href="tjm-vers-net.html" class="tab-button active">TJM ➔ Net</a>
+    </div>
+
+    <div class="glass-panel">
+        <img src="logo.png" alt="CXO PORTAGE" class="logo">
+        <h1>SIMULATEUR : TJM ➔ NET</h1>
+
+        <div class="input-group">
+            <div class="label-row">TJM : <span class="value-display" id="tjm-val">650</span> €</div>
+            <input type="range" id="tjm" min="300" max="2000" step="10" value="650" oninput="calculer()">
+        </div>
+
+        <div class="input-group">
+            <div class="label-row">Jours travaillés : <span class="value-display" id="jours-val">20</span> j</div>
+            <input type="range" id="jours" min="1" max="22" step="1" value="20" oninput="calculer()">
+        </div>
+
+        <div class="input-group">
+            <div class="label-row">Frais Pro mensuels : <span class="value-display" id="frais-val">400</span> €</div>
+            <input type="range" id="frais" min="0" max="3000" step="50" value="400" oninput="calculer()">
+        </div>
+
+        <div class="result-box">
+            <div class="result-label">Estimation Salaire Net</div>
+            <div id="total-net" class="result-value">-- €</div>
+        </div>
+
+        <div class="details-section">
+            <div class="detail-row">
+                <span class="detail-label">CA mensuel HT :</span>
+                <span class="detail-val" id="det-ca">-- €</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Gestion CXO (5%) :</span>
+                <span class="detail-val" id="det-gestion">-- €</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Salaire Brut :</span>
+                <span class="detail-val" id="det-brut">-- €</span>
+            </div>
+        </div>
+
+        <a href="https://calendly.com/aurelie-dubois-celexio/cxo-portage" class="btn-calendly">Mon étude personnalisée ✨</a>
+    </div>
+
+<script>
+function calculer() {
+    const tjm = parseFloat(document.getElementById('tjm').value);
+    const jours = parseFloat(document.getElementById('jours').value);
+    const fraisPro = parseFloat(document.getElementById('frais').value);
+    
+    document.getElementById('tjm-val').innerText = tjm;
+    document.getElementById('jours-val').innerText = jours;
+    document.getElementById('frais-val').innerText = fraisPro;
+
+    const ca = tjm * jours;
+    const fraisGestion = ca * 0.05;
+    const masseSalarialeDispo = ca - fraisGestion - fraisPro;
+    
+    const salaireBrut = masseSalarialeDispo / 1.45;
+    const salaireNetSalarial = salaireBrut * 0.78;
+    const totalFinal = salaireNetSalarial + fraisPro;
+
+    document.getElementById('total-net').innerText = Math.round(totalFinal).toLocaleString('fr-FR') + " €";
+    document.getElementById('det-ca').innerText = Math.round(ca).toLocaleString('fr-FR') + " €";
+    document.getElementById('det-gestion').innerText = Math.round(fraisGestion).toLocaleString('fr-FR') + " €";
+    document.getElementById('det-brut').innerText = Math.round(salaireBrut).toLocaleString('fr-FR') + " €";
+}
+calculer();
+</script>
+
+</body>
+</html>
