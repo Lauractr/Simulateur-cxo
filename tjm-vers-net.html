@@ -15,9 +15,9 @@
             min-height: 100vh; color: white;
         }
         
-        /* Style du menu d'onglets */
+        /* Style du menu d'onglets corrigé pour 3 boutons */
         .tabs-container {
-            display: flex; gap: 10px; margin-bottom: 20px;
+            display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center;
         }
         .tab-button {
             background: rgba(255, 255, 255, 0.05);
@@ -44,18 +44,23 @@
         }
         .logo { width: 120px; margin-bottom: 25px; }
         h1 { font-size: 1.2rem; margin-bottom: 35px; color: #00FFFF; text-transform: uppercase; letter-spacing: 2px; }
+        
         .input-group { margin-bottom: 25px; text-align: left; }
         .label-row { display: flex; align-items: center; margin-bottom: 10px; font-size: 0.9rem; }
         .value-display { color: #00FFFF; font-weight: bold; margin-left: 8px; }
+        
         input[type=range] { width: 100%; -webkit-appearance: none; background: rgba(255, 255, 255, 0.15); height: 5px; border-radius: 5px; outline: none; }
         input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; background: #00FFFF; border-radius: 50%; cursor: pointer; box-shadow: 0 0 10px rgba(0, 255, 255, 0.6); }
+
         .result-box { margin-top: 20px; padding: 20px; background: linear-gradient(135deg, #4A148C 0%, #7B1FA2 100%); border-radius: 20px; }
         .result-label { font-size: 0.85rem; opacity: 0.9; margin-bottom: 5px; }
         .result-value { font-size: 2.5rem; font-weight: 700; color: #00FFFF; }
+
         .details-section { margin-top: 25px; text-align: left; font-size: 0.8rem; line-height: 1.5; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; }
         .detail-row { display: flex; justify-content: space-between; margin-bottom: 6px; }
         .detail-label { opacity: 0.7; }
         .detail-val { font-weight: bold; color: #00FFFF; }
+
         .btn-calendly { display: inline-block; margin-top: 25px; padding: 15px 25px; background: #00FFFF; color: #000; text-decoration: none; border-radius: 50px; font-weight: 800; font-size: 0.8rem; text-transform: uppercase; }
     </style>
 </head>
@@ -64,6 +69,7 @@
     <div class="tabs-container">
         <a href="index.html" class="tab-button">Standard</a>
         <a href="tjm-vers-net.html" class="tab-button active">TJM ➔ Net</a>
+        <a href="objectif-salaire.html" class="tab-button">Objectif Salaire</a>
     </div>
 
     <div class="glass-panel">
